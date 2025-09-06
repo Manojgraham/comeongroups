@@ -1,0 +1,61 @@
+{
+  "title": "What's Included in the 7@777 Buffet",
+  "note": "Items vary by day & location; buffet is unlimited when 7 dine together via Groupies.",
+  "categories": [
+    {
+      "key": "starters",
+      "name": "Unlimited Starters",
+      "image": "inc-starters.jpg",
+      "items": [
+        "Crispy Corn",
+        "Cajun Spiced Potatoes",
+        "Paneer Tikka",
+        "Mushroom Tikka",
+        "Honey Chilli Pineapple",
+        "Chicken Tikka",
+        "Seekh Kebab",
+        "Fish Tikka",
+        "Prawns (where available)"
+      ]
+    },
+    {
+      "key": "grills",
+      "name": "Live Table Grills",
+      "image": "inc-grills.jpg",
+      "items": [
+        "BBQ Chicken Wings",
+        "Tandoori Prawns",
+        "Veg Skewers (Paneer/Aloo/Mushroom)",
+        "Grilled Pineapple",
+        "Assorted Kebabs & Marinades"
+      ]
+    },
+    {
+      "key": "mains",
+      "name": "Hearty Mains",
+      "image": "inc-mains.jpg",
+      "items": [
+        "Veg/Chicken Biryani",
+        "Butter Chicken",
+        "Mutton Rogan Josh (availability varies)",
+        "Paneer Butter Masala",
+        "Dal Makhani",
+        "Seasonal Veg Curry",
+        "Naan/Roti & Rice"
+      ]
+    },
+    {
+      "key": "desserts",
+      "name": "Dessert Studio",
+      "image": "inc-desserts.jpg",
+      "items": [
+        "Kulfi (multiple flavors) with toppings",
+        "Gulab Jamun",
+        "Jalebi",
+        "Cakes & Pastries",
+        "Brownies",
+        "Ice Cream"
+      ]
+    }
+  ]
+}

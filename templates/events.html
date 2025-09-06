@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% block title %}Events — groupies.com{% endblock %}
+
+{% block content %}
+
+<!-- (A) OPTIONAL: Compact "Full Buffet Details" modal trigger -->
+<div class="container mt-3 d-flex justify-content-end">
+  <button class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#includedModal">
+    Full Buffet Details
+  </button>
+</div>
+
+<!-- (B) Full Buffet Details Modal (text-first, small thumbs) -->
+<div class="modal fade" id="includedModal" tabindex="-1" aria-labelledby="includedModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="includedModalLabel">{{ buffet.title }}</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-secondary small mb-3">{{ buffet.note }}</p>
+        <div class="row g-3">
+          {% for cat in buffet.categories %}
+            <div class="col-12">
+              <div class="d-flex gap-3 align-items-start p-2 rounded" style="background:#111;border:1px solid rgba(255,255,255,.08);">
+                <img
+                  src="{{ url_for('static', filename=cat.image) }}"
+                  alt="{{ cat.name }}"
+                  width="72" height="54"
+                  style="object-fit:cover; border-radius:8px;"
+                  loading="lazy"
+                >
+                <div>
+                  <div class="fw-semibold mb-1">{{ cat.name }}</div>
+                  <ul class="small text-secondary mb-0 ps-3">
+                    {% for item in cat['items'] %}
+                      <li>{{ item }}</li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+          <div class="col-12 small text-secondary mt-2">
+            Note: spread can vary by outlet/day; buffet is unlimited when 7 dine together via Groupies.
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#events" class="btn btn-brand">Find a table</a>
+        <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- (C) HERO -->
+<section class="hero">
+  <div class="inner container">
+    <div class="mx-auto glass p-4 p-md-5" style="max-width:900px;">
+      <h1 class="fw-bold display-5">Eat Together. Save Together.</h1>
+      <p class="lead mb-4">
+        Go solo <span class="strike">₹1000</span>. Join 7 → only
+        <span class="text-warning">₹777</span>. Meet new people & build your network.
+      </p>
+      <a class="btn btn-brand btn-lg px-4" href="{{ url_for('signup') }}">Join free</a>
+      <a class="btn btn-outline-light btn-lg ms-2" href="#events">See tables</a>
+    </div>
+  </div>
+</section>
+
+<!-- (D) RETAIL vs WHOLESALE -->
+<section class="container my-5">
+  <h2 class="fw-bold text-center mb-4">Retail vs Wholesale Dining</h2>
+  <div class="row g-4 align-items-center">
+    <!-- Retail -->
+    <div class="col-md-6">
+      <div class="card bg-dark text-white shadow h-100">
+        <img src="{{ url_for('static', filename='retail.jpg') }}" class="card-img-top" alt="Dining alone">
+        <div class="card-body">
+          <h5 class="card-title">Retail Price</h5>
+          <p class="card-text">Go alone → Pay <span class="strike">₹1000</span></p>
+          <p class="text-secondary mb-0">Expensive & less fun.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Wholesale -->
+    <div class="col-md-6">
+      <div class="card bg-dark text-white shadow h-100">
+        <img src="{{ url_for('static', filename='wholesale.jpg') }}" class="card-img-top" alt="Group dining">
+        <div class="card-body">
+          <h5 class="card-title">Wholesale Price (Groupies)</h5>
+          <p class="card-text">Join with 7 → Only <span class="fw-bold text-warning">₹777</span></p>
+          <p class="text-secondary mb-0">Shared joy, shared cost, more fun.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- (E) 7@777 Buffet — Compact, text-first preview -->
+<section class="container my-5" id="buffet-included">
+  <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-3">
+    <h3 class="fw-bold mb-0">{{ buffet.title }}</h3>
+    <span class="inc-badge">Unlimited Buffet · Best with 7</span>
+  </div>
+  <p class="text-secondary small mb-4">{{ buffet.note }}</p>
+
+  <div class="row g-4">
+    {% for cat in buffet.categories %}
+      <div class="col-12 col-md-6">
+        <div class="card bg-dark text-white h-100 shadow-sm rounded-3">
+          <div class="row g-0">
+            <div class="col-4 d-flex align-items-center">
+              <img src="{{ url_for('static', filename=cat.image) }}"
+                   alt="{{ cat.name }}"
+                   class="img-fluid rounded-start"
+                   style="object-fit:cover; height:150px; width:100%;"
+                   loading="lazy">
+            </div>
+            <div class="col-8">
+              <div class="card-body">
+                <h5 class="card-title mb-2">{{ cat.name }}</h5>
+                <ul class="small text-secondary ps-3 mb-0">
+                  {% for item in cat['items'] %}
+                    <li>{{ item }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="text-center mt-4">
+    <small class="text-secondary">
+      Solo price: <span class="strike">₹1000</span> · Groupies price:
+      <span class="text-warning fw-bold">₹777 per person</span>
+    </small>
+    <button class="btn btn-outline-light btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#includedModal">
+      Full Buffet Details
+    </button>
+  </div>
+</section>
+
+<!-- (F) EVENTS LIST — upgraded to cards -->
+<section id="events" class="container my-5">
+  <h3 class="fw-bold mb-3">Hot tables near you</h3>
+
+  <div class="row g-3">
+    {% for event in events %}
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card h-100 bg-dark text-white shadow-sm">
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title mb-1">{{ event.event_name }}</h5>
+            <div class="text-secondary small mb-3">Group size: {{ event.members_needed }}</div>
+            <div class="mt-auto">
+              <a href="{{ url_for('event_detail', event_id=event.id) }}" class="btn btn-brand btn-sm">View</a>
+              <button type="button" class="btn btn-outline-light btn-sm ms-2" data-bs-toggle="modal" data-bs-target="#includedModal">
+                What's included
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <a class="btn btn-danger mt-4" href="{{ url_for('logout') }}">Logout</a>
+</section>
+
+{% endblock %}

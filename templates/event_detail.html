@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<h4>{{ event.event_name }}</h4>
+<p>Members joined: {{ members }} / {{ event.members_needed }}</p>
+<a class="btn btn-primary" href="{{ url_for('join_event', event_id=event.id) }}">Join Now</a>
+<a class="btn btn-secondary" href="{{ url_for('home') }}">Back</a>
+{% endblock %}
